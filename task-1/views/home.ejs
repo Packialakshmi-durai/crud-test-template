@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <title>CRUD</title>
+
+  </head>
+
+  <body  ng-app="myapp" ng-controller="fristcontroller">
+    <div class="container">
+    <hr>
+    <button type="button" class="btn btn-info btn-lg float-right" data-toggle="modal" data-target="#myModal">Add New</button>
+
+
+    <h2>Employee Details</h2>
+    <span class="clearfix"></span>
+  <hr>
+  <div class="alert alert-info" ng-if=message>
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{message}}</strong> 
+</div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Quetions</th>
+        <th>Answer</th>
+        <th> Edit</th>
+        <th> Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in users">
+        <td>{{$index+1}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td>{{user.question}}</td>
+        <td>{{user.answer}}</td>
+        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalEdit" ng-click="selectuser(user)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete"ng-click="selectuser(user)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="container">
+  
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-right">New User Registration</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Username</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control"  ng-model="newuser.username" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Email</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" ng-model="newuser.email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" name="fullname">Phone</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="newuser.phone">
+                  </div>
+                </div>
+                
+                <div class="form-group">        
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal" ng-click="saveuser(newuser)">Save</button>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModalEdit" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-right">Edit User Registration</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Email</label>
+                  <div class="col-sm-10">
+                    <input type="emai" class="form-control"ng-model="edituser.email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2">Phone</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control"ng-model="edituser.phone">
+                  </div>
+                </div>
+                <div class="form-group">        
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default" data-dismiss="modal" ng-click="updateuser(edituser)">Update</button>
+                  </div>
+                </div>
+              </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModalDelete" role="dialog">
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title pull-right">Delete User</h4>
+        </div>
+        <div class="modal-body">
+          <strong style="color: red">your are going to delete  {{edituser.username}}</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"ng-click="deleteuser()">Delete</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+  </div>
+  </body>
+</html>
