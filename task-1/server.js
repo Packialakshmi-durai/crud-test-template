@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 var connection=mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '*****',
+    password: 'packia19',
     database: 'crud'
 })
 

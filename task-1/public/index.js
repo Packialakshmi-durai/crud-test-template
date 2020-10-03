@@ -31,6 +31,7 @@ myapp.controller("fristcontroller",function($scope,$http, $location){
 			};
 
 			$scope.deleteuser=function(name){
+				$scope.users.splice($scope.users.indexOf($scope.edituser),1);
 				var username={"username":$scope.edituser.username}
 				console.log(username)
 				$http.post('http://localhost:4000/delete', username)
